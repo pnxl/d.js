@@ -1,0 +1,34 @@
+{
+  "name": "byte",
+  "private": true,
+  "version": "1.0.0",
+  "description": "byte",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "forever src/index.js",
+    "register": "node src/misc/scripts/register.js",
+    "format": "prettier -w *"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nytrium/byte.git"
+  },
+  "author": "pnxl <pix3l.icious@gmail.com>",
+  "license": "GNU GPLv3",
+  "bugs": {
+    "url": "https://github.com/Nytrium/byte/issues"
+  },
+  "homepage": "https://github.com/Nytrium/byte#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.11.0",
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "colors": "^1.4.0",
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^13.6.0",
+    "dotenv": "^14.2.0",
+    "eslint": "^8.7.0",
+    "forever": "^4.0.2",
+    "gradient-string": "^2.0.0",
+    "systeminformation": "^5.10.7"
+  }
+}

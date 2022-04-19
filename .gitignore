@@ -1,0 +1,47 @@
+# modules will be restored upon running 'npm install'
+node_modules
+
+# node debug
+npm-debug.log
+
+# lol no
+.env
+cfg.json
+
+# exclude windows bullshit
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+.lnk
+
+# exclude os x bullshit
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# exclude linux bullshit
+*~
+.fuse_hidden*
+.directory
+.Trash~*
+.nfs*
+
+# vscode files
+*.code_worspace
+.vscode
+
+# sublime text files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
