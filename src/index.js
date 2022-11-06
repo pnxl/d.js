@@ -1,32 +1,27 @@
-// init console
-console.clear;
-const print = require('./misc/helpers/print.js');
-print.comment("I'm ready to serve you, senpai!~ >~<");
-print.comment('If you like this bot, make sure to leave a star on GitHub!\n');
+/*
+ * The main bot file, it handles events and logins to the
+ * Discord API
+ *
+ * Made with <3 by Jason
+ *
+ * Copyright (c) Pix3l_ 2022
+ * Code is licensed under MIT
+ */
 
-// import modules
-const { Client, Collection, Intents } = require('discord.js');
-require('dotenv').config();
+// Import the required modules and load from .env file
+const { Client, GatewayIntentBits, Collection } = require("discord.js");
+require("dotenv").config();
 
-// create client
-const client = new Client({
-	intents: [
-		Intents.FLAGS.GUILDS,
-		Intents.FLAGS.GUILD_MESSAGES,
-		Intents.FLAGS.GUILD_MEMBERS,
-	],
-});
-module.exports = client;
+// Clear the console when started
+console.clear();
 
-// create global vars
-client.applicationCmd = new Collection();
-client.legacyCmd = new Collection();
-client.cooldowns = new Collection();
+// Create a new client and a collection for the commands
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+client.commands = new Collection();
 
-// import loaders
-require('./misc/loaders/applicationCmd.js')(client, print);
-require('./misc/loaders/legacyCmd.js')(client, print);
-require('./misc/loaders/event.js')(client, print);
+// Call the command and event loader
+require("./miscellaneous/loader/command")(client);
+require("./miscellaneous/loader/event")(client);
 
-// login
-client.login(process.env.secret);
+// Finally, login to the Discord API
+client.login(process.env.BOT_TOKEN);
