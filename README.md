@@ -15,4 +15,4 @@
 
 ## License
 
-Licensed under the GNU-GPLv3.0 license. See the file `LICENSE` for more information.
+Licensed under the MIT license. See the file `LICENSE` for more information.
