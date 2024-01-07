@@ -36,7 +36,7 @@ module.exports = async (client) => {
     }
 
     print.log(
-      `Successfully loaded ${client.commands.size} application commands.`
+      `Successfully loaded ${client.slashCmds.size} application commands.`
     );
   }
 };
