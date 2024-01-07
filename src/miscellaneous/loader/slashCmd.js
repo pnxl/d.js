@@ -14,29 +14,32 @@ const print = require("../../helpers/print");
 
 module.exports = async (client) => {
   // Define the path for commands folder and filter only .js files
-  const cmdFile = readdirSync("./src/commands/slash/").filter((file) =>
-    file.endsWith(".js")
-  );
+  const cmdFolder = readdirSync("./src/commands/slash/");
 
-  for (const f of cmdFile) {
-    const loc = `../../commands/slash/${f}`;
-    const cmd = require(loc);
+  for (const folder of cmdFolder) {
+    const cmdFile = readdirSync(`./src/commands/slash/${folder}`).filter(
+      (file) => file.endsWith(".js")
+    );
 
-    if ("data" in cmd && "execute" in cmd) {
-      // Pushes the command to the command collection and logs said command
-      client.slashCmds.set(cmd.data.name, cmd);
-      print.debug(
-        `The application command \`${f}\` has been loaded successfully!`
-      );
-    } else {
-      // If the command doesn't have a data or execute property, warn the user
-      print.warn(
-        `The application command at ${loc} is missing a required \`data\` or \`execute\` property.`
+    for (const file of cmdFile) {
+      const cmd = require(`../../commands/slash/${folder}/${file}`);
+
+      if ("data" in cmd && "execute" in cmd) {
+        // Pushes the command to the command collection and logs said command
+        client.slashCmds.set(cmd.data.name, cmd);
+        print.debug(
+          `The application command \`${f}\` has been loaded successfully!`
+        );
+      } else {
+        // If the command doesn't have a data or execute property, warn the user
+        print.warn(
+          `The application command at ${loc} is missing a required \`data\` or \`execute\` property.`
+        );
+      }
+
+      print.log(
+        `Successfully loaded ${client.slashCmds.size} application commands.`
       );
     }
-
-    print.log(
-      `Successfully loaded ${client.slashCmds.size} application commands.`
-    );
   }
 };

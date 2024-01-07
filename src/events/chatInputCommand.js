@@ -38,7 +38,7 @@ module.exports = {
     if (!cmd) {
       await interaction.reply({
         content:
-          "We're sorry, an internal error has occurred. Rest assured, we are trying to fix this as fast as possible.",
+          "Sorry! I've encountered an error processing your command, something inside me must've went wrong. Please try again later!",
         ephemeral: true,
       });
       print.error(
