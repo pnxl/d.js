@@ -9,6 +9,7 @@
 
 // Import the required modules
 const { Events } = require("discord.js");
+const print = require("../../helpers/print");
 
 // Export the command data for loader
 module.exports = {
@@ -40,8 +41,8 @@ module.exports = {
           "We're sorry, an internal error has occurred. Rest assured, we are trying to fix this as fast as possible.",
         ephemeral: true,
       });
-      console.error(
-        `[ERR] No command matching ${interaction.commandName} was found! Did you re-deploy your commands?`
+      print.error(
+        `No command matching ${interaction.commandName} was found! Did you re-deploy your commands?`
       );
       return;
     }
