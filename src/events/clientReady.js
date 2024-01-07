@@ -31,7 +31,7 @@ module.exports = {
     console.log(
       chalk.bold(
         gradient.pastel(
-          "\nThe bot is ready! Logged in as " + client.user.tag + "\n"
+          "\nThe bot is ready! Logged in as " + client.user.tag + ".\n"
         )
       )
     );
