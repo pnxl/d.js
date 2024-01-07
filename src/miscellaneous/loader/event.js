@@ -41,6 +41,6 @@ module.exports = async (client) => {
   }
 
   print.log(
-    `Successfully loaded ${evnOnce} \`once\` and ${evnOn} \`on\` events`
+    `Successfully loaded ${evnOnce} \`once\` and ${evnOn} \`on\` events.`
   );
 };
