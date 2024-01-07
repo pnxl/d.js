@@ -13,6 +13,7 @@ module.exports = {
    * Command      : /ping
    * Aliases      : /pong
    * Description  : Pong!
+   * Usage        : /ping
    * Cooldown     : 0
    *
    * What it does : A basic test command, it
@@ -24,6 +25,7 @@ module.exports = {
   name: "ping",
   alias: ["pong"],
   description: "Pong!",
+  usage: "{cmdName}",
   cooldown: 0,
 
   // Execute the command asynchronously

@@ -24,6 +24,7 @@ module.exports = {
 
   // Define data for loader
   data: new SlashCommandBuilder().setName("ping").setDescription("Pong!"),
+  usage: "{cmdName}",
   cooldown: 0,
 
   // Execute the command asynchronously
