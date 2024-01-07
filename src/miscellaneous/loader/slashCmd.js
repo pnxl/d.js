@@ -28,12 +28,12 @@ module.exports = async (client) => {
         // Pushes the command to the command collection and logs said command
         client.slashCmds.set(cmd.data.name, cmd);
         print.debug(
-          `The application command \`${f}\` has been loaded successfully!`
+          `The application command \`${file}\` has been loaded successfully!`
         );
       } else {
         // If the command doesn't have a data or execute property, warn the user
         print.warn(
-          `The application command at ${loc} is missing a required \`data\` or \`execute\` property.`
+          `The application command at ${folder}/${file} is missing a required \`data\` or \`execute\` property.`
         );
       }
 
