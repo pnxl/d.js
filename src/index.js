@@ -20,7 +20,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 
 // Call the command and event loader
-require("./miscellaneous/loader/command")(client);
+require("./miscellaneous/loader/slashCmd")(client);
 require("./miscellaneous/loader/event")(client);
 
 // Finally, login to the Discord API
