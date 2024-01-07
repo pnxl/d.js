@@ -1,7 +1,5 @@
 /*
- * This is the interactionCreate event; specifically,
- * only the command interaction events. It executes the
- * command on user interaction.
+ * This is the `interactionCreate/chatInputCommand` event.
  *
  * Made with <3 by Jason
  *
@@ -25,7 +23,7 @@ module.exports = {
 
   // Define data for loader
   name: Events.InteractionCreate,
-  once: true,
+  once: false,
 
   // Execute the event asynchronously
   async execute(interaction) {

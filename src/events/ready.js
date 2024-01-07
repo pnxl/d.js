@@ -1,6 +1,5 @@
 /*
- * This is the ready event. It prints an output
- * once the bot is up and running.
+ * This is the `ready` event.
  *
  * Made with <3 by Jason
  *
