@@ -27,7 +27,7 @@ module.exports = async (client) => {
     const loc = `../../events/${f}`;
     const evn = require(loc);
 
-    print.debug(`The event ${f} has been loaded successfully!`);
+    print.debug(`The event \`${f}\` has been loaded successfully!`);
 
     if (evn.once) {
       // If the event only happens once
