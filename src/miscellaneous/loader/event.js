@@ -11,6 +11,7 @@
 
 // Import the required modules
 const { readdirSync } = require("node:fs");
+const print = require("../../helpers/print");
 
 module.exports = async (client) => {
   // Define the path for commands folder and filter only .js files
@@ -22,13 +23,13 @@ module.exports = async (client) => {
     const loc = `../../events/${f}`;
     const evn = require(loc);
 
+    print.debug(`The event ${f} has been loaded successfully!`);
+
     if (evn.once) {
       // If the event only happens once
-      console.log(`The event ${f} has been loaded successfully!`);
       client.once(evn.name, (...args) => evn.execute(...args));
     } else {
       // If the event happens multiple times
-      console.log(`The event ${f} has been loaded successfully!`);
       client.on(evn.name, (...args) => evn.execute(...args));
     }
   }

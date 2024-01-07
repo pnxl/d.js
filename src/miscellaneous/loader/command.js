@@ -10,6 +10,7 @@
 
 // Import the required modules
 const { readdirSync } = require("node:fs");
+const print = require("../../helpers/print");
 
 module.exports = async (client) => {
   // Define the path for commands folder and filter only .js files
@@ -24,12 +25,16 @@ module.exports = async (client) => {
     if ("data" in cmd && "execute" in cmd) {
       // Pushes the command to the command collection and logs said command
       client.commands.set(cmd.data.name, cmd);
-      console.log(`The command ${f} has been loaded successfully!`);
+      print.debug(`The command ${f} has been loaded successfully!`);
     } else {
       // If the command doesn't have a data or execute property, warn the user
-      console.log(
-        `[WARN] The command at ${loc} is missing a required \`data\` or \`execute\` property.`
+      print.warn(
+        `The command at ${loc} is missing a required \`data\` or \`execute\` property.`
       );
     }
+
+    print.log(
+      `Successfully loaded ${client.commands.size} application commands`
+    );
   }
 };
