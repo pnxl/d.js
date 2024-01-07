@@ -1,6 +1,5 @@
 /*
- * This is the /ping command. It responds with 'Pong!'
- * when executed.
+ * This is the /ping command.
  *
  * Made with <3 by Jason
  *
