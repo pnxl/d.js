@@ -19,6 +19,10 @@ module.exports = async (client) => {
     file.endsWith(".js")
   );
 
+  // Create arrays for event counting
+  let evnOn = 0;
+  let evnOnce = 0;
+
   for (const f of evnFile) {
     const loc = `../../events/${f}`;
     const evn = require(loc);
@@ -28,9 +32,15 @@ module.exports = async (client) => {
     if (evn.once) {
       // If the event only happens once
       client.once(evn.name, (...args) => evn.execute(...args));
+      evnOnce++;
     } else {
       // If the event happens multiple times
       client.on(evn.name, (...args) => evn.execute(...args));
+      evnOn++;
     }
   }
+
+  print.log(
+    `Successfully loaded ${evnOnce} \`once\` and ${evnOn} \`on\` events`
+  );
 };
