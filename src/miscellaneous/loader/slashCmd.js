@@ -25,7 +25,9 @@ module.exports = async (client) => {
     if ("data" in cmd && "execute" in cmd) {
       // Pushes the command to the command collection and logs said command
       client.commands.set(cmd.data.name, cmd);
-      print.debug(`The application command ${f} has been loaded successfully!`);
+      print.debug(
+        `The application command \`${f}\` has been loaded successfully!`
+      );
     } else {
       // If the command doesn't have a data or execute property, warn the user
       print.warn(
