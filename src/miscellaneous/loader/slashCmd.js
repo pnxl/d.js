@@ -24,7 +24,7 @@ module.exports = async (client) => {
 
     if ("data" in cmd && "execute" in cmd) {
       // Pushes the command to the command collection and logs said command
-      client.commands.set(cmd.data.name, cmd);
+      client.slashCmds.set(cmd.data.name, cmd);
       print.debug(
         `The application command \`${f}\` has been loaded successfully!`
       );
@@ -36,7 +36,7 @@ module.exports = async (client) => {
     }
 
     print.log(
-      `Successfully loaded ${client.commands.size} application commands`
+      `Successfully loaded ${client.commands.size} application commands.`
     );
   }
 };
