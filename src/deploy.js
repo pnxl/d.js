@@ -28,11 +28,15 @@ const cmdFile = readdirSync("./src/commands/").filter((file) =>
 // Grab data from SlashCommandBuilder, then throws the output to the array.
 for (const f of cmdFile) {
   const cmd = require(`./commands/${f}`);
-  cmds.push(cmd.data.toJSON());
+  if ('data' in cmd && 'execute' in cmd) {
+    cmds.push(cmd.data.toJSON());
+  } else {
+    console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+  }
 }
 
 // Builds and prepares an instance of the REST module
-const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
+const rest = new REST().setToken(process.env.BOT_TOKEN);
 
 (async () => {
   try {
@@ -41,11 +45,19 @@ const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
     // Fully refresh and deploy all commands in the guild with current set
     const data = await rest.put(
       Routes.applicationGuildCommands(
-        process.env.CLIENT_ID,
-        process.env.SERVER_ID
+        process.env.CLIENT_ID, process.env.SERVER_ID
       ),
       { body: cmds }
     );
+
+    // Deploy all commands to all guilds with current set.
+    /* const data = await rest.put(
+     *   Routes.applicationCommands(
+     *     process.env.CLIENT_ID
+     *   ),
+     *   { body: cmds }
+     * );
+     */
 
     console.log(`Successfully deployed ${data.length} application commands.`);
   } catch (e) {
