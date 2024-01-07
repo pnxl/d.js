@@ -47,6 +47,35 @@ module.exports = {
       return;
     }
 
+    const { slashCooldowns } = interaction.client;
+
+    if (!slashCooldowns.has(cmd.data.name)) {
+      slashCooldowns.set(cmd.data.name, new Collection());
+    }
+
+    // Get current time
+    const now = Date.now();
+
+    // Get cooldown
+    const timestamps = slashCooldowns.get(cmd.data.name);
+    const cooldown = cmd.cooldown * 1000;
+
+    // If user has a cooldown
+    if (timestamps.has(interaction.user.id)) {
+      const expirationTime = timestamps.get(interaction.user.id) + cooldown;
+
+      if (now < expirationTime) {
+        const expiredTimestamp = Math.round(expirationTime / 1000);
+        return interaction.reply({
+          content: `You're sending commands too fast! You can try again <t:${expiredTimestamp}:R>.`,
+          ephemeral: true,
+        });
+      }
+    }
+
+    timestamps.set(interaction.user.id, now);
+    setTimeout(() => timestamps.delete(interaction.user.id), cooldown);
+
     try {
       // Try to execute the command
       await cmd.execute(interaction);

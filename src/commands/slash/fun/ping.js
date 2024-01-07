@@ -15,6 +15,7 @@ module.exports = {
   /*
    * Command      : /ping
    * Description  : Pong!
+   * Cooldown     : 0
    *
    * What it does : A basic test command, it
    *                only responds with "Pong!"
@@ -23,6 +24,7 @@ module.exports = {
 
   // Define data for loader
   data: new SlashCommandBuilder().setName("ping").setDescription("Pong!"),
+  cooldown: 0,
 
   // Execute the command asynchronously
   async execute(interaction) {
