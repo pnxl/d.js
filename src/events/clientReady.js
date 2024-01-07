@@ -1,5 +1,5 @@
 /*
- * This is the `ready` event.
+ * This is the `ClientReady` event.
  *
  * Made with <3 by Jason
  *
@@ -9,11 +9,13 @@
 
 // Import the required modules
 const { Events } = require("discord.js");
+const gradient = require("gradient-string");
+const chalk = require("chalk");
 
 // Export the command data for loader
 module.exports = {
   /*
-   * Event        : Ready
+   * Event        : ClientReady
    * Usage        : Once
    *
    * What it does : Once the ready event is
@@ -26,6 +28,12 @@ module.exports = {
 
   // Execute the event
   execute(client) {
-    console.log("The bot is ready! Logged in as " + client.user.tag);
+    console.log(
+      chalk.bold(
+        gradient.pastel(
+          "\nThe bot is ready! Logged in as " + client.user.tag + "\n"
+        )
+      )
+    );
   },
 };
