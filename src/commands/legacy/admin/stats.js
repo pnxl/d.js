@@ -33,6 +33,8 @@ module.exports = {
 
   // Execute the command asynchronously
   async execute(client, message, args) {
+    await message.channel.sendTyping();
+
     const tme = si.time();
     const sys = await si.system();
     const bas = await si.baseboard();
