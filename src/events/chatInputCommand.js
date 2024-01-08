@@ -9,7 +9,7 @@
 
 // Import the required modules
 const { Events, Collection } = require("discord.js");
-const print = require("../../helpers/print");
+const print = require("../helpers/print");
 
 // Export the command data for loader
 module.exports = {
