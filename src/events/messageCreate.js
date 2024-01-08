@@ -28,7 +28,7 @@ module.exports = {
   once: false,
 
   // Execute the event asynchronously
-  execute(message, client) {
+  async execute(message, client) {
     if (!message.content.startsWith(config.prefix)) return;
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
@@ -48,6 +48,10 @@ module.exports = {
     if (cmd.permissions) {
       const authorPerms = message.channel.permissionsFor(message.author);
       if (!authorPerms || !authorPerms.has(cmd.permissions)) {
+        print.debug(
+          message.author.username +
+            `<${message.author.id}> attempted to run ${cmd.name} but did not have the necessary permissions.`
+        );
         return message.reply(
           "You don't have the permission to run this command!"
         );
@@ -55,6 +59,11 @@ module.exports = {
     }
 
     if (cmd.args && !args.length) {
+      print.debug(
+        message.author.username +
+          `<${message.author.id}> attempted to run ${cmd.name} but did not enter any arguments.`
+      );
+
       return message.reply(`You didn't provide any arguments!`);
     }
 
@@ -77,6 +86,10 @@ module.exports = {
 
       if (now < expirationTime) {
         const expiredTimestamp = Math.round(expirationTime / 1000);
+        print.debug(
+          message.author.username +
+            `<${message.author.id}> attempted to run ${cmd.name} but was on a ${cmd.cooldown} second cooldown.`
+        );
         return message.reply(
           `You're sending commands too fast! You can try again <t:${expiredTimestamp}:R>.`
         );
@@ -88,10 +101,17 @@ module.exports = {
 
     try {
       // Try to execute the command
-      cmd.execute(client, message, args);
+      await cmd.execute(client, message, args);
+      print.debug(
+        message.author.username + `<${message.author.id}> ran ${cmd.name}.`
+      );
     } catch (err) {
-      // Print an error on the console if there was one
-      print.error(err);
+      // If the execution fails, log to console and return an error message
+      print.error(
+        message.author.username +
+          `<${message.author.id}> attempted to run ${cmd.name} encountered an error.\n` +
+          err
+      );
       message.reply(
         "Sorry! I've encountered an error processing your command, something inside me must've went wrong. Please try again later!"
       );
