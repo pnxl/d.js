@@ -68,7 +68,7 @@ module.exports = {
         const expiredTimestamp = Math.round(expirationTime / 1000);
         print.debug(
           message.author.username +
-            `<${message.author.id}> attempted to run ${cmd.name} but was on a ${cmd.cooldown} second cooldown.`
+            ` <${message.author.id}> attempted to run ${cmd.name} but was on a ${cmd.cooldown} second cooldown.`
         );
         return interaction.reply({
           content: `You're sending commands too fast! You can try again <t:${expiredTimestamp}:R>.`,
@@ -90,7 +90,7 @@ module.exports = {
       // If the execution fails, log to console and return an error message
       print.error(
         message.author.username +
-          `<${message.author.id}> attempted to run ${cmd.name} encountered an error.\n` +
+          ` <${message.author.id}> attempted to run ${cmd.name} encountered an error.\n` +
           err
       );
       await interaction.reply({

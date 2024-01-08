@@ -50,7 +50,7 @@ module.exports = {
       if (!authorPerms || !authorPerms.has(cmd.permissions)) {
         print.debug(
           message.author.username +
-            `<${message.author.id}> attempted to run ${cmd.name} but did not have the necessary permissions.`
+            ` <${message.author.id}> attempted to run ${cmd.name} but did not have the necessary permissions.`
         );
         return message.reply(
           "You don't have the permission to run this command!"
@@ -61,7 +61,7 @@ module.exports = {
     if (cmd.args && !args.length) {
       print.debug(
         message.author.username +
-          `<${message.author.id}> attempted to run ${cmd.name} but did not enter any arguments.`
+          ` <${message.author.id}> attempted to run ${cmd.name} but did not enter any arguments.`
       );
 
       return message.reply(`You didn't provide any arguments!`);
@@ -88,7 +88,7 @@ module.exports = {
         const expiredTimestamp = Math.round(expirationTime / 1000);
         print.debug(
           message.author.username +
-            `<${message.author.id}> attempted to run ${cmd.name} but was on a ${cmd.cooldown} second cooldown.`
+            ` <${message.author.id}> attempted to run ${cmd.name} but was on a ${cmd.cooldown} second cooldown.`
         );
         return message.reply(
           `You're sending commands too fast! You can try again <t:${expiredTimestamp}:R>.`
@@ -103,13 +103,13 @@ module.exports = {
       // Try to execute the command
       await cmd.execute(client, message, args);
       print.debug(
-        message.author.username + `<${message.author.id}> ran ${cmd.name}.`
+        message.author.username + ` <${message.author.id}> ran ${cmd.name}.`
       );
     } catch (err) {
       // If the execution fails, log to console and return an error message
       print.error(
         message.author.username +
-          `<${message.author.id}> attempted to run ${cmd.name} encountered an error.\n` +
+          ` <${message.author.id}> attempted to run ${cmd.name} encountered an error.\n` +
           err
       );
       message.reply(
