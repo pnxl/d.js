@@ -10,7 +10,7 @@
 // Import the required modules
 const { Events, Collection } = require("discord.js");
 const config = require("../../config.json");
-const print = require("../../helpers/print");
+const print = require("../helpers/print");
 
 // Export the command data for loader
 module.exports = {
@@ -28,26 +28,35 @@ module.exports = {
   once: false,
 
   // Execute the event asynchronously
-  async execute(message) {
-    if (
-      !message.content.startsWith(config.prefix) ||
-      message.author.client ||
-      message.client.type === "DM" ||
-      message.author.bot
-    )
-      return;
+  execute(message, client) {
+    if (!message.content.startsWith(config.prefix)) return;
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/);
     const cmdName = args[0].toLowerCase();
 
     // If the command doesn't exist, simply ignore
-    if (!client.legacyCmds.has(cmdName)) return;
+    if (!message.client.legacyCmds.has(cmdName)) return;
 
     const cmd =
-      client.legacyCmds.get(cmdName) ||
-      client.legacyCmds.find((c) => c.alias && c.alias.includes(cmdName));
+      message.client.legacyCmds.get(cmdName) ||
+      message.client.legacyCmds.find(
+        (c) => c.alias && c.alias.includes(cmdName)
+      );
 
     if (!cmd) return;
+
+    if (cmd.permissions) {
+      const authorPerms = message.channel.permissionsFor(message.author);
+      if (!authorPerms || !authorPerms.has(cmd.permissions)) {
+        return message.reply(
+          "You don't have the permission to run this command!"
+        );
+      }
+    }
+
+    if (cmd.args && !args.length) {
+      return message.reply(`You didn't provide any arguments!`);
+    }
 
     const { legacyCooldowns } = message.client;
 
@@ -59,7 +68,7 @@ module.exports = {
     const now = Date.now();
 
     // Get cooldown
-    const timestamps = slashCooldowns.get(cmd.data.name);
+    const timestamps = legacyCooldowns.get(cmd.name);
     const cooldown = cmd.cooldown * 1000;
 
     // If user has a cooldown
