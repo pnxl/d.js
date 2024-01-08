@@ -33,7 +33,7 @@ module.exports = {
 
   // Execute the command asynchronously
   async execute(client, message, args) {
-    const tme = await si.time();
+    const tme = si.time();
     const sys = await si.system();
     const bas = await si.baseboard();
     const efi = await si.bios();
