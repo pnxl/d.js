@@ -34,9 +34,6 @@ module.exports = {
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
     const cmdName = args[0].toLowerCase();
 
-    // If the command doesn't exist, simply ignore
-    if (!message.client.legacyCmds.has(cmdName)) return;
-
     const cmd =
       message.client.legacyCmds.get(cmdName) ||
       message.client.legacyCmds.find(
