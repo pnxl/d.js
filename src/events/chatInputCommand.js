@@ -42,7 +42,7 @@ module.exports = {
         ephemeral: true,
       });
       print.error(
-        `No command matching ${interaction.commandName} was found! Did you re-deploy your commands?`
+        `No command matching /${interaction.commandName} was found! Did you re-deploy your commands?`
       );
       return;
     }
@@ -68,7 +68,7 @@ module.exports = {
         const expiredTimestamp = Math.round(expirationTime / 1000);
         print.debug(
           message.author.username +
-            ` <${message.author.id}> attempted to run ${cmd.name} but was on a ${cmd.cooldown} second cooldown.`
+            ` <${message.author.id}> attempted to run /${cmd.name} but was on a ${cmd.cooldown} second cooldown.`
         );
         return interaction.reply({
           content: `You're sending commands too fast! You can try again <t:${expiredTimestamp}:R>.`,
@@ -84,13 +84,13 @@ module.exports = {
       // Try to execute the command
       await cmd.execute(interaction);
       print.debug(
-        message.author.username + `<${message.author.id}> ran ${cmd.name}.`
+        message.author.username + `<${message.author.id}> ran /${cmd.name}.`
       );
     } catch (err) {
       // If the execution fails, log to console and return an error message
       print.error(
         message.author.username +
-          ` <${message.author.id}> attempted to run ${cmd.name} encountered an error.\n` +
+          ` <${message.author.id}> attempted to run /${cmd.name} encountered an error.\n` +
           err
       );
       await interaction.reply({
