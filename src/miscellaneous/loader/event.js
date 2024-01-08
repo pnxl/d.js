@@ -5,7 +5,7 @@
  *
  * Made with <3 by Jason
  *
- * Copyright (c) Pix3l_ 2022
+ * Copyright (c) Pix3l_ 2024
  * Code is licensed under MIT
  */
 

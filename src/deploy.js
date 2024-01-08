@@ -5,7 +5,7 @@
  *
  * Made with <3 by Jason
  *
- * Copyright (c) Pix3l_ 2022
+ * Copyright (c) Pix3l_ 2024
  * Code is licensed under MIT
  */
 
@@ -28,10 +28,12 @@ const cmdFile = readdirSync("./src/commands/").filter((file) =>
 // Grab data from SlashCommandBuilder, then throws the output to the array.
 for (const f of cmdFile) {
   const cmd = require(`./commands/${f}`);
-  if ('data' in cmd && 'execute' in cmd) {
+  if ("data" in cmd && "execute" in cmd) {
     cmds.push(cmd.data.toJSON());
   } else {
-    console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+    console.log(
+      `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`
+    );
   }
 }
 
@@ -45,7 +47,8 @@ const rest = new REST().setToken(process.env.BOT_TOKEN);
     // Fully refresh and deploy all commands in the guild with current set
     const data = await rest.put(
       Routes.applicationGuildCommands(
-        process.env.CLIENT_ID, process.env.SERVER_ID
+        process.env.CLIENT_ID,
+        process.env.SERVER_ID
       ),
       { body: cmds }
     );
