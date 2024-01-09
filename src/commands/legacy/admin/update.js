@@ -10,7 +10,7 @@
 // Import the required modules
 const si = require("systeminformation");
 const { execSync } = require("child_process");
-const { ButtonStyle, ButtonBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonStyle, ButtonBuilder } = require("discord.js");
 const print = require("../../../helpers/print");
 
 // Export the command data for loader
@@ -57,6 +57,7 @@ module.exports = {
       );
     }
 
+    // Fetch latest commits from Git
     const response = await message.reply("Checking for any new updates...");
     execSync("git fetch", (error, stderr) => {
       if (error) {
@@ -82,11 +83,14 @@ module.exports = {
       return;
     });
 
-    const commitLocal = execSync("git rev-parse --short HEAD").slice(0, 7);
+    const commitLocal = execSync("git rev-parse --short HEAD")
+      .slice(0, 7)
+      .toString();
 
-    const commitRemote = execSync("git ls-remote").slice(0, 7);
+    const commitRemote = execSync("git ls-remote").toString();
 
-    if (commitLocal === commitRemote) {
+    // If it's the same, reply
+    if (commitLocal == commitRemote) {
       return response
         .edit(
           `There are no updates! Rocky is running on the latest version. (\`${commitLocal}\`)`
@@ -96,8 +100,65 @@ module.exports = {
 
     response.delete();
 
-    message.channel.send({
-      content: `There's a new update available! I am currently running on commit \`${commitLocal}\`\, but the newest commit is \`${commitRemote}\`. Would you like to update?`,
+    // Define buttons for confirmation
+    const confirm = new ButtonBuilder()
+      .setCustomId("confirm")
+      .setLabel("Yes, update now.")
+      .setStyle(ButtonStyle.Primary);
+
+    const cancel = new ButtonBuilder()
+      .setCustomId("cancel")
+      .setLabel("Nevermind!")
+      .setStyle(ButtonStyle.Secondary);
+
+    const link = new ButtonBuilder()
+      .setLabel("View commit details")
+      .setURL(
+        "https://github.com/pnxl/d.js/commit/" + commitRemote.slice(0, 40)
+      )
+      .setStyle(ButtonStyle.Link);
+
+    const row = new ActionRowBuilder().addComponents(link, cancel, confirm);
+
+    // Ask for confirmation to update
+    const confirmation = await message.channel.send({
+      content: `There's a new update available! I am currently running on commit \`${commitLocal}\`\, but the newest commit is \`${commitRemote.slice(
+        0,
+        7
+      )}\`. Would you like to update?`,
+      components: [row],
     });
+
+    // Filter who presses the buttons
+    const collectorFilter = (i) => i.user.id === message.author.id;
+
+    try {
+      const answer = await confirmation.awaitMessageComponent({
+        filter: collectorFilter,
+        time: 300 * 1000,
+      });
+
+      if (answer.customId === "confirm") {
+        confirmation.delete();
+        const reply = await message.channel.send(
+          "Alrighty! Fetching the latest update..."
+        );
+        const pull = execSync("git pull").toString();
+        reply.delete();
+        await message.channel.send(
+          `${pull.slice(0, 24)}\n\`\`\`diff\n${pull.slice(25)}\n\`\`\``
+        );
+        message.channel.send("Restarting bot...");
+        setTimeout(() => process.exit(), 5000);
+      } else if (answer.customId === "cancel") {
+        confirmation.delete();
+        message.channel.send("Update cancelled.");
+      }
+    } catch (e) {
+      confirmation.delete();
+      message.channel.send(
+        "A confirmation wasn't received in five minutes, cancelling."
+      );
+    }
   },
 };
