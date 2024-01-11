@@ -4,14 +4,11 @@
 
 > Simple Discord.js bot template to help me kickstart my Discord.js projects!
 
+## Features
 - Supports both slash and legacy commands!
-- Very cool console logging
-
-## TODO
-
-- [ ] Fix statistics
-- [ ] Support arrays for owner
-- [ ] Update command to pull from git repo
+- Very cool console logging (with toggleable debug on config)
+- Update command that lets you pull from your Git repo (all from Discord)
+- Statistics command to check up on your host machine
 
 ## License
 
