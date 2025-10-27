@@ -12,6 +12,7 @@ const si = require("systeminformation");
 const { execSync } = require("child_process");
 const { ActionRowBuilder, ButtonStyle, ButtonBuilder } = require("discord.js");
 const print = require("../../../helpers/print");
+const config = require("../../../../config.json");
 
 // Export the command data for loader
 module.exports = {
@@ -36,21 +37,7 @@ module.exports = {
   async execute(client, message, args) {
     await message.channel.sendTyping();
 
-    // Get software versions
-    const ver = await si.versions();
-
-    if (ver.git === "") {
-      return message.reply(
-        "I couldn't update because one or more dependencies are missing. Do you have `git` and `pm2` installed?"
-      );
-    }
-
-    if (ver.pm2 === "") {
-      return message.reply(
-        "I couldn't update because one or more dependencies are missing. Do you have `git` and `pm2` installed?"
-      );
-    }
-
+    // Check if process is ran with PM2
     if (!process.env.PM2_HOME) {
       return message.reply(
         "I couldn't update because my process wasn't ran with `pm2`. Try terminating and then starting me with `npm run start`."
@@ -62,21 +49,21 @@ module.exports = {
     execSync("git fetch", (error, stderr) => {
       if (error) {
         print.error(
-          `An error occured when trying to fetch the latest commit: ${error.message}`
+          `An error occured when trying to fetch the latest commit. \`\`\`${error.message}\`\`\``
         );
         return response
           .edit(
-            `An error occured when trying to fetch the latest commit: ${error.message}`
+            `An error occured when trying to fetch the latest commit. \`\`\`${error.message}\`\`\``
           )
           .catch(print.error);
       }
       if (stderr) {
         print.error(
-          `An error occured when trying to fetch the latest commit: ${stderr}`
+          `An error occured when trying to fetch the latest commit. \`\`\`${stderr}\`\`\``
         );
         return response
           .edit(
-            `An error occured when trying to fetch the latest commit: ${error.message}`
+            `An error occured when trying to fetch the latest commit. \`\`\`${error.message}\`\`\``
           )
           .catch(print.error);
       }
@@ -93,7 +80,7 @@ module.exports = {
     if (commitLocal == commitRemote) {
       return response
         .edit(
-          `There are no updates! Rocky is running on the latest version. (\`${commitLocal}\`)`
+          `There are no updates! ${config.name} is running on the latest version. (commit \`${commitLocal}\`)`
         )
         .catch(print.error);
     }
@@ -113,9 +100,7 @@ module.exports = {
 
     const link = new ButtonBuilder()
       .setLabel("View commit details")
-      .setURL(
-        "https://github.com/pnxl/d.js/commit/" + commitRemote.slice(0, 40)
-      )
+      .setURL(config.repository + commitRemote.slice(0, 40))
       .setStyle(ButtonStyle.Link);
 
     const row = new ActionRowBuilder().addComponents(link, cancel, confirm);
@@ -141,7 +126,7 @@ module.exports = {
       if (answer.customId === "confirm") {
         confirmation.delete();
         const reply = await message.channel.send(
-          "Alrighty! Fetching the latest update..."
+          "Alright! Fetching the latest update..."
         );
         const pull = execSync("git pull").toString();
         reply.delete();
