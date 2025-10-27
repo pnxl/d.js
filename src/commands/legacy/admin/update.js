@@ -1,9 +1,7 @@
 /*
- * This is the /stats command.
+ * Pulls the latest commit from git.
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 
@@ -17,13 +15,10 @@ const config = require("../../../../config.json");
 // Export the command data for loader
 module.exports = {
   /*
-   * Command      : /update
-   * Aliases      : /pull
-   * Description  : Pulls the latest commit from git
-   * Usage        : /update
+   * Command      : update
+   * Aliases      : pull
+   * Usage        : update
    * Cooldown     : 0
-   *
-   * What it does : Pulls the latest commit from git
    */
 
   // Define data for loader

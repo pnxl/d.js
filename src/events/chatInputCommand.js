@@ -1,9 +1,7 @@
 /*
- * This is the `interactionCreate/chatInputCommand` event.
+ * On user interaction with command, execute given command or return an error.
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 
@@ -14,12 +12,8 @@ const print = require("../helpers/print");
 // Export the command data for loader
 module.exports = {
   /*
-   * Event        : interactionCreate/chatInputCommand
+   * Event        : InteractionCreate/ChatInputCommand
    * Usage        : On
-   *
-   * What it does : On user interaction with command,
-   *                execute given command or return
-   *                an error.
    */
 
   // Define data for loader

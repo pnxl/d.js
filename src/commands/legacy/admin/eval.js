@@ -1,9 +1,8 @@
 /*
- * This is the /ping command.
+ * Evaluates code. This can be VERY dangerous if not used properly, or is restricted to only the bot's owner.
+ * You should remove this file if you do not use it.
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 
@@ -16,13 +15,10 @@ const util = require("util");
 // Export the command data for loader
 module.exports = {
   /*
-   * Command      : /eval
-   * Aliases      : /exec, /execute, /evaluate
-   * Description  : execute code
-   * Usage        : /eval {code}
+   * Command      : eval
+   * Aliases      : exec, execute, evaluate
+   * Usage        : eval [code]
    * Cooldown     : 0
-   *
-   * What it does : execute code
    */
 
   // Define data for loader

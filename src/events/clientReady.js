@@ -1,9 +1,7 @@
 /*
- * This is the `ClientReady` event.
+ * Once the ready event is emitted, log to console.
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 
@@ -17,9 +15,6 @@ module.exports = {
   /*
    * Event        : ClientReady
    * Usage        : Once
-   *
-   * What it does : Once the ready event is
-   *                emitted, log to console.
    */
 
   // Define data for loader

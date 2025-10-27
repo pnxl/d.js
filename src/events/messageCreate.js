@@ -1,9 +1,7 @@
 /*
- * This is the `messageCreate` event.
+ * Listen for any legacy commands (with prefix defined in config) and execute command.
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 
@@ -15,12 +13,8 @@ const print = require("../helpers/print");
 // Export the command data for loader
 module.exports = {
   /*
-   * Event        : messageCreate
+   * Event        : MessageCreate
    * Usage        : On
-   *
-   * What it does : Listen for any legacy commands
-   *                (with prefix defined in config)
-   *                and execute command.
    */
 
   // Define data for loader

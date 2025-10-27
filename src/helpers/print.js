@@ -2,9 +2,7 @@
  * Print helper for beautiful console logging. print.debug
  * only shows if you have `verbose = true` on config!
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 

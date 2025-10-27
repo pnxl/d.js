@@ -1,9 +1,7 @@
 /*
- * This is the /ping command.
+ * A basic test command, it only responds with "Pong!" when it is executed.
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 
@@ -13,13 +11,10 @@ const { SlashCommandBuilder } = require("discord.js");
 // Export the command data for loader
 module.exports = {
   /*
-   * Command      : /ping
-   * Description  : Pong!
+   * Command      : ping
+   * Aliases      :
+   * Usage        : ping
    * Cooldown     : 0
-   *
-   * What it does : A basic test command, it
-   *                only responds with "Pong!"
-   *                when it is executed.
    */
 
   // Define data for loader

@@ -1,9 +1,7 @@
 /*
- * This is the /stats command.
+ * Shows you the current statistics of the server it's hosted on.
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 
@@ -15,13 +13,10 @@ const package = require("../../../../package.json");
 // Export the command data for loader
 module.exports = {
   /*
-   * Command      : /stats
-   * Aliases      : /statistics, /hostinfo
-   * Description  : Shows you the current statistics of my home
-   * Usage        : /stats
+   * Command      : stats
+   * Aliases      : statistics, hostinfo
+   * Usage        : stats
    * Cooldown     : 0
-   *
-   * What it does : Shows you the current statistics of my home
    */
 
   // Define data for loader

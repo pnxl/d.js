@@ -2,9 +2,7 @@
  * This file loads the commands inside the /commands
  * folder, and then pushes it to the commands collection
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 

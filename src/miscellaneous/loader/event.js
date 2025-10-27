@@ -3,9 +3,7 @@
  * folder, and then pushes it to the main bot file
  * for listening
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 

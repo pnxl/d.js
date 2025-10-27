@@ -3,9 +3,7 @@
  * to one specific guild, so make sure you put your guild
  * ID on the .env file!
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 

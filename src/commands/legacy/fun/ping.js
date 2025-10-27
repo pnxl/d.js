@@ -1,24 +1,17 @@
 /*
- * This is the /ping command.
+ * A basic test command, it only responds with "Pong!" when it is executed.
  *
- * Made with <3 by Jason
- *
- * Copyright (c) Pix3l_ 2024
+ * Copyright (c) Jason Fang 2025
  * Code is licensed under MIT
  */
 
 // Export the command data for loader
 module.exports = {
   /*
-   * Command      : /ping
-   * Aliases      : /pong
-   * Description  : Pong!
-   * Usage        : /ping
+   * Command      : ping
+   * Aliases      :
+   * Usage        : ping
    * Cooldown     : 0
-   *
-   * What it does : A basic test command, it
-   *                only responds with "Pong!"
-   *                when it is executed.
    */
 
   // Define data for loader
