@@ -74,7 +74,7 @@ module.exports = {
       .slice(0, 7)
       .toString();
 
-    const commitRemote = execSync("git ls-remote").toString();
+    const commitRemote = execSync("git ls-remote").slice(0, 7).toString();
 
     // If it's the same, reply
     if (commitLocal == commitRemote) {
@@ -107,10 +107,7 @@ module.exports = {
 
     // Ask for confirmation to update
     const confirmation = await message.channel.send({
-      content: `There's a new update available! I am currently running on commit \`${commitLocal}\`\, but the newest commit is \`${commitRemote.slice(
-        0,
-        7
-      )}\`. Would you like to update?`,
+      content: `There's a new update available! I am currently running on commit \`${commitLocal}\`\, but the newest commit is \`${commitRemote}\`. Would you like to update?`,
       components: [row],
     });
 
