@@ -17,15 +17,15 @@ module.exports = class print {
     }
   }
   static info(str) {
-    console.log(`[${chalk.blue("INFO")}] ${chalk.dim(str)}`);
+    console.log(`[${chalk.blue("INF")}] ${chalk.dim(str)}`);
   }
   static log(str) {
     console.log(`[${chalk.cyan("LOG")}] ${str}`);
   }
   static warn(str) {
-    console.log(`${chalk.black.bgYellow("WARN!")} ${chalk.yellow(str)}`);
+    console.log(`${chalk.black.bgYellow("WRN")} ${chalk.yellow(str)}`);
   }
   static error(str) {
-    console.log(`${chalk.black.bgRed("ERROR")} ${chalk.red(str)}`);
+    console.log(`${chalk.black.bgRed("ERR")} ${chalk.red(str)}`);
   }
 };
